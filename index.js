@@ -16,21 +16,24 @@ app.use(passport.session());
 app.get('/', (req, res) => {
   res.render('pages/index')
 })
+//user succes login
+app.get('/users', (req, res) =>{
+    res.render('pages/user.ejs')
+})
 // login 
 app.get('/login', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // user
-app.get('/user', (req, res) =>{
-    res.render('pages/user.ejs')
-})
+
 
 // hanle affter login success
-app.get('/login/callback', passport.authenticate('google', {failureRedirect: '/failed'},
-    function(req, res){
-        res.redirect('/user')
-    }
-    ))
-
+app.get('/login/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/users');
+    
+  })
+  
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
