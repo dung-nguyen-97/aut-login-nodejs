@@ -12,6 +12,8 @@ app.set('view engine', 'ejs')
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
 //main
 app.get('/', (req, res) => {
   res.render('pages/index')
